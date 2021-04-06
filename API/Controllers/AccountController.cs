@@ -33,7 +33,6 @@ namespace API.Controllers
 
             using var hmac = new HMACSHA512();
 
-
             user.UserName = registerDto.UserName.ToLower();
             user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
             user.PasswordSalt = hmac.Key;
@@ -48,7 +47,8 @@ namespace API.Controllers
                 UserName = user.UserName,
                 Token = _tokenService.CreatrToken(user),
                 //PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
-                KnownAs = user.KnownAs
+                KnownAs = user.KnownAs,
+                Gender = user.Gender
             };
         }
 
@@ -75,7 +75,8 @@ namespace API.Controllers
                 UserName = user.UserName,
                 Token = _tokenService.CreatrToken(user),
                 PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
-                KnownAs = user.KnownAs
+                KnownAs = user.KnownAs,
+                Gender = user.Gender
             };
         }
 
